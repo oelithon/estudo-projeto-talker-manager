@@ -10,10 +10,12 @@ app.use(bodyParser.json());
 const HTTP_OK_STATUS = 200;
 const PORT = '3000';
 
-app.get('/talker', (req, res) => {
-  const data = JSON.parse(fs.readFileSync(arquivoTalker, 'utf8'));
-  res.status(200).send(data);
-});
+app
+  .route('/talker')
+  .get((req, res) => {
+    const data = JSON.parse(fs.readFileSync(arquivoTalker, 'utf8'));
+    res.status(200).send(data);
+  });
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
