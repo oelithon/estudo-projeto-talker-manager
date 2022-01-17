@@ -19,6 +19,13 @@ const HTTP_OK_STATUS = 200;
 const PORT = '3000';
 
 app
+  .route('/talker/search')
+  .get(
+    tokenValidator,
+    getTalkerSearch,
+  );
+
+app
   .route('/talker')
   .get(talker)
   .post(
@@ -29,13 +36,6 @@ app
     watchedAtValidator,
     rateValidator,
     postTalker,
-  );
-
-app
-  .route('/talker/search')
-  .get(
-    tokenValidator,
-    getTalkerSearch,
   );
 
 app
