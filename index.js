@@ -6,6 +6,7 @@ const talkerId = require('./middlewares/talker-id');
 const login = require('./middlewares/login');
 const postTalker = require('./middlewares/postTalker');
 const putTalkerId = require('./middlewares/putTalkerId');
+const deleteTalker = require('./middlewares/deteleTalker');
 const { tokenValidator, nameValidator, ageValidator,
   talkValidator, watchedAtValidator, rateValidator,
 } = require('./middlewares/validatorInfo');
@@ -40,6 +41,10 @@ app
     watchedAtValidator,
     rateValidator,
     putTalkerId,
+  )
+  .delete(
+    tokenValidator,
+    deleteTalker,
   );
 
 app
