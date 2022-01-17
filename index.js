@@ -1,13 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const getTalkerSearch = require('./middlewares/getTalkerSearch');
 const talker = require('./middlewares/talker');
-const talkerId = require('./middlewares/talker-id');
-const login = require('./middlewares/login');
 const postTalker = require('./middlewares/postTalker');
+const talkerId = require('./middlewares/talker-id');
 const putTalkerId = require('./middlewares/putTalkerId');
 const deleteTalker = require('./middlewares/deteleTalker');
-const getTalkerSearch = require('./middlewares/getTalkerSearch');
+const login = require('./middlewares/login');
 const { tokenValidator, nameValidator, ageValidator,
   talkValidator, watchedAtValidator, rateValidator,
 } = require('./middlewares/validatorInfo');
