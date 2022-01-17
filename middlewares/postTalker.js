@@ -57,7 +57,7 @@ function ageValidator(req, res, next) {
 
 function talkValidator(req, res, next) {
   const { talk } = req.body;
-  if (!talk || !talk.watchedAt || !talk.rate) {
+  if (!talk || !talk.watchedAt || (!talk.rate && talk.rate !== 0)) {
     res
       .status(400)
       .json(

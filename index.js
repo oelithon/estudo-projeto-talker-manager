@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const talker = require('./middlewares/talker');
 const talkerId = require('./middlewares/talker-id');
 const login = require('./middlewares/login');
+const putTalkerId = require('./middlewares/putTalkerId');
 const {
   postTalker,
   tokenValidator,
@@ -35,7 +36,16 @@ app
 
 app
   .route('/talker/:id')
-  .get(talkerId);
+  .get(talkerId)
+  .put(
+    tokenValidator,
+    nameValidator,
+    ageValidator,
+    talkValidator,
+    watchedAtValidator,
+    rateValidator,
+    putTalkerId,
+  );
 
 app
   .route('/login')
