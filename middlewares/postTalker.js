@@ -46,11 +46,6 @@ function ageValidator(res, age) {
   }
 }
 
-function dataValidator(watchedAt) {
-  const regExpData = /^([0-3][0-1]|[0-2]\d)\/(0[1-9]|1[0-2])\/\d{4}/;
-  return regExpData.test(watchedAt);
-}
-
 function talkValidator(res, talk) {
   if (!talk || !talk.watchedAt || !talk.rate) {
     res
@@ -58,6 +53,23 @@ function talkValidator(res, talk) {
       .json(
         { message: 'O campo "talk" é obrigatório e "watchedAt" e "rate" não podem ser vazios' },
       );
+  }
+}
+
+function dataValidator(watchedAt) {
+  const regExpData = /^([0-3][0-1]|[0-2]\d)\/(0[1-9]|1[0-2])\/\d{4}/;
+  return regExpData.test(watchedAt);
+}
+
+function watchedAtValidator(res, talk) {
+  if (!dataValidator(talk.watchedAt)) {
+    res.status(400).json({ message: 'O campo "watchedAt" deve ter o formato "dd/mm/aaaa"' });
+  }
+}
+
+function rateValidator(res, talk) {
+  if (talk.rate > 5 || talk.rate < 1) {
+    res.status(400).json({ message: 'O campo "rate" deve ser um inteiro de 1 à 5' });
   }
 }
 
@@ -69,15 +81,9 @@ const postTalker = (req, res) => {
   nameValidator(res, name);
   ageValidator(res, age);
   talkValidator(res, talk);
+  watchedAtValidator(res, talk);
+  rateValidator(res, talk);
 
-  if (!dataValidator(talk.watchedAt)) {
-    res.status(400).json({ message: 'O campo "watchedAt" deve ter o formato "dd/mm/aaaa"' });
-    return;
-  }
-  if (talk.rate > 5 || talk.rate < 1) {
-    res.status(400).json({ message: 'O campo "rate" deve ser um inteiro de 1 à 5' });
-    return;
-  }
   res.status(201).json(writeFileJson(req.body));
 };
 
