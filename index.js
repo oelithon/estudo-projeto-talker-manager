@@ -4,16 +4,11 @@ const bodyParser = require('body-parser');
 const talker = require('./middlewares/talker');
 const talkerId = require('./middlewares/talker-id');
 const login = require('./middlewares/login');
+const postTalker = require('./middlewares/postTalker');
 const putTalkerId = require('./middlewares/putTalkerId');
-const {
-  postTalker,
-  tokenValidator,
-  nameValidator,
-  ageValidator,
-  talkValidator,
-  watchedAtValidator,
-  rateValidator,
-} = require('./middlewares/postTalker');
+const { tokenValidator, nameValidator, ageValidator,
+  talkValidator, watchedAtValidator, rateValidator,
+} = require('./middlewares/validatorInfo');
 
 const app = express();
 app.use(bodyParser.json());
